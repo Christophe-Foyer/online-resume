@@ -31,6 +31,14 @@ h1 {
 h2 {
   font-size: 3.5rem; }
 
+.img-bg {
+  height: 100%;
+  margin:0px;
+  background-image: url("../img/bgimage.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+}
+  
 .subheading {
   text-transform: uppercase;
   font-weight: 500;
