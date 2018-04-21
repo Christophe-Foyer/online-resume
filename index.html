@@ -478,8 +478,18 @@
           
           <!--<div class="col-lg-8 col-lg-offset-2">-->
           <div class="d-flex flex-column flex-md-row" style="width:100%".>
-            <div class="mb-2" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; cursor: pointer;" onclick="window.location='https://www.linkedin.com/in/christophe-foyer?trk=profile-badge';"> <!-- This is a janky fix but until Linkedin decides to fix their end this is how it's gonna be -->
-                <div class="LI-profile-badge" data-version="v1" data-size="large" data-locale="en_EN" data-type="horizontal" data-theme="light" data-vanity="christophe-foyer"><a class="LI-simple-link" href='https://www.linkedin.com/in/christophe-foyer?trk=profile-badge'>Christophe Foyer</a></div>
+          
+            <script>
+            function linkedinRedirect() {
+               window.location='https://www.linkedin.com/in/christophe-foyer?trk=profile-badge';
+               if (!e) var e = window.event;
+                   e.cancelBubble = true;
+                   if (e.stopPropagation) e.stopPropagation();
+            }
+            </script>
+          
+            <div class="mb-2" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; cursor: pointer;" onclick="linkedinRedirect()"> <!-- This is a janky fix but until Linkedin decides to fix their end this is how it's gonna be -->
+                <div style="background-color:rgba(255, 255, 255, 0.5); pointer-events:none;" class="LI-profile-badge" data-version="v1" data-size="large" data-locale="en_EN" data-type="horizontal" data-theme="light" data-vanity="christophe-foyer"><a class="LI-simple-link" href='https://www.linkedin.com/in/christophe-foyer?trk=profile-badge'>Christophe Foyer</a></div>
             </div>
             <div class="col-lg-9 text-md-right">
                 <a class="btn btn-info btn-lg btn-block mb-2" href="https://www.cfoyer.com/"><i class="fa fa-home"></i> Homepage</a>
