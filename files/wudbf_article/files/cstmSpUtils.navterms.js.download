@@ -1,0 +1,118 @@
+//=================================================================================
+//  cstmSpUtils.NavTerms.js
+//  - Generates html elements (unordered lists) for given metadata termset hierarchy 
+//  - usage:
+//      cstmSpUtils.NavTerms.init(termSetName, container);
+//    example:
+//      cstmSpUtils.NavTerms.init("Managed Metadata Service", "My Footer Nav", ".cstm-footer .cstm-poplinks");
+//  - history:
+//    2013mar29 CSantos   Created.
+//    2014aug20 CSantos   Use termSetName instead of ID.  Fix cleanup.  Use <h4> for top-level.  Allow for text-only top-level.
+//    2014sep10 CSantos   Invoke onComplete callback even if error.
+//=================================================================================
+
+// see also:
+// http://blog.mastykarz.nl/building-global-navigation-sharepoint-2013/
+// http://vrdmn.blogspot.com/2012/12/working-with-taxonomy-and-javascript-in.html
+// http://code.msdn.microsoft.com/office/SharePoint-2013-Create-and-1ebbdd36/sourcecode?fileId=76895&pathId=922735108
+// http://stackoverflow.com/questions/5258722/how-does-one-get-all-child-terms-of-a-sharepoint-term-in-c
+
+Function.registerNamespace('cstmSpUtils.NavTerms');
+
+
+
+// put hierarchy of html lists to display terms
+cstmSpUtils.NavTerms.init = function(termSetName, topContainer, onComplete) {
+  (function($) {
+    var childCounter = 0;
+    var notifyID = "";
+
+    // helper function for recursion
+    function getTerms(context, terms, container, parentTermID) {
+      childCounter++;
+      context.load(terms);
+      context.executeQueryAsync(Function.createDelegate(this, function(sender, args) {
+          var termsEnumerator = terms.getEnumerator();
+
+          while (termsEnumerator.moveNext()) {
+            var currentTerm = termsEnumerator.get_current();
+            var currentTermID = currentTerm.get_id().toString();
+            var lnkText = currentTerm.get_name();
+            var lnkHref = currentTerm.get_localCustomProperties()['_Sys_Nav_SimpleLinkUrl'];
+            if (typeof(lnkHref) == "undefined") {
+              lnkHref = "#";
+            }
+            
+            var childTerms = currentTerm.get_terms();
+
+            // add ul for children; include current term's ID in the class
+            // so recursive async call will find where to inject html
+            var navHtml = lnkText;
+            if (lnkHref != '') {
+              navHtml = '<a href="' + lnkHref + '">' + navHtml + '</a>';
+            }
+            //if (parentTermID == '') {
+            //  navHtml = '<h4>' + navHtml + '</h4>';
+            //}
+            navHtml = '<li>' + navHtml + '<ul class="term' + currentTermID + '"></ul></li>';
+            $(container).append(navHtml);
+            
+            // async call to get children
+            getTerms(context, childTerms,  $(container).find("ul.term" + currentTermID), currentTermID);
+          }
+          
+          childCounter--;
+          if (childCounter == 0) {
+            // last one; cleanup:
+            //SP.UI.Notify.removeNotification(notifyID);
+            $(topContainer).find(".loading").remove();
+            // remove empty ul elements
+            $(topContainer).find("ul.navterms:empty").remove();
+            // remove helper classes ("term*")
+            $(topContainer).find("ul.navterms ul").removeClass();
+            
+            // run callback, if any
+            if (typeof(onComplete) == "function") {
+              onComplete.call(this);
+            }
+          }
+          
+          
+      }), Function.createDelegate(this, function(sender, args) {
+          // Show error message
+          $(topContainer).append('<div class="error">Not able to load navigation terms at this time.</div>');
+          var debugme = 'The following error has occured while loading navigation terms: ' + args.get_message();
+          
+          // Cleanup
+          $(topContainer).find(".loading").remove();
+          $(topContainer).find("ul.navterms:empty").remove();
+          
+          // run callback, if any
+          if (typeof(onComplete) == "function") {
+            onComplete.call(this);
+          }
+      }));
+    };
+
+    
+    // Generate nested lists in html to display the metadata terms
+    // For Chrome loading of scripts, see http://spblog.net/post/2012/01/20/SharePoint-2010-Script-On-Demand%E2%80%93give-my-script-right-now!.aspx
+    // see http://sharepoint.stackexchange.com/questions/61941/scriptresx-ashx-not-working
+    'use strict';
+    //notifyID = SP.UI.Notify.addNotification("<img src='/_layouts/15/images/loadingcirclests16.gif?rev=23' style='vertical-align:bottom; display:inline-block; margin-" + (document.documentElement.dir == "rtl" ? "left" : "right") + ":2px;' />&nbsp;<span style='vertical-align:top;'>Loading navigation...</span>", false);
+    // see http://sharepoint.stackexchange.com/questions/93974/gettermsetsbyname-does-not-return-an-instance-of-termset
+    var context = SP.ClientContext.get_current();
+    var taxonomySession = SP.Taxonomy.TaxonomySession.getTaxonomySession(context);
+    var termStore = taxonomySession.getDefaultSiteCollectionTermStore();
+    var termSets = taxonomySession.getTermSetsByName(termSetName, 1033);
+    var termSet = termSets.getByName(termSetName);
+    
+    var terms = termSet.get_terms();
+    
+    // Add main list ul
+    $(topContainer).append('<ul class="navterms"></ul>');
+    // Build out the html from the hierarchy
+    getTerms(context, terms, $(topContainer).children("ul.navterms"), "");
+  })(jQuery);
+};
+

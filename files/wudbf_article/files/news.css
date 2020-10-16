@@ -1,0 +1,115 @@
+/*modifications for display template listing*/
+.deptNewsItem {
+	display:inline-block;
+	width:48%;
+	vertical-align:top;
+	margin-bottom:30px;
+}
+.cbs-List li:nth-child(odd) .deptNewsItem {
+	margin-right:3%;
+}
+.deptNewsItem img {
+	float:left;
+	margin:0 20px 20px 0;
+}
+@media screen and (max-width:1050px) {
+.deptNewsItem img {width:150px; margin:0 10px 10px 0;}
+}
+@media screen and (max-width:800px) {
+.deptNewsItem {display:block; width:100%;}
+}
+.cstm-bodywrap div.deptNewsItem a h3 {
+	color:#9e0918;
+	padding-top:0;
+	margin-top:0;
+}
+
+
+/*regular news detail page*/
+.cstm-content {
+  padding-right:50px;  /* have room for addthis share buttons */
+}
+
+.cstm-intro .byline {
+  color: #000;
+  font-size: 14px;
+  margin-bottom: 1em;
+}
+.cstm-intro .byline .separator {
+  padding: 0 6px;
+}
+
+div.ms-rteElement-newshighlight { 
+  -ms-name:"News Highlight"; 
+  -ms-element:"true"; 
+} 
+
+.floatl,
+.ms-rteStyle-floatleft,
+.floatr,
+.ms-rteStyle-floatright {
+  max-width:55%;
+}
+
+
+.cstm-section {
+  font-size:1em;
+}
+.cstm-section ul {
+  padding-left:20px;
+}
+
+/* addthis share buttons */
+.addthis-smartlayers #at4-share, 
+.addthis-smartlayers #at4-soc {
+  display:none!important;
+}
+.cstm-share-news .atss {
+  top:356px;
+  bottom:auto;
+}
+
+div.cbq-layout-main {
+	max-width:253px;
+}
+
+
+/* -------------------------------------------------------- */
+@media screen and (max-width:950px) {
+  .cstm-share-news .atss {
+    top:261px;
+  }
+}
+
+/* -------------------------------------------------------- */
+@media screen and (max-width:600px) {
+  .cstm-content {
+    padding-right:2.439024390243902%;
+  }
+  .cstm-share-news .atss {
+    float:none;
+    position:static;
+    width:auto;
+  }
+  .cstm-share-news .atss.atss-right a {
+    position:static;
+    float:left;
+  }
+  .cstm-share-news {
+    display:block;
+    position:fixed;
+    bottom:0;
+    left:0;
+    z-index:1;
+    width:100%;
+    background:#333;
+    box-shadow:0 -2px 7px #333;
+  }
+  
+  .floatl,
+  .ms-rteStyle-floatleft,
+  .floatr,
+  .ms-rteStyle-floatright {
+    max-width:100%;
+  }
+}

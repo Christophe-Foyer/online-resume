@@ -1,0 +1,503 @@
+﻿
+// Globals
+var _cstmConst_LayoutsFolder = "/_catalogs/masterpage/WUSTLEngr";
+
+// Get random number
+function _cstmFunc_GetRandomNum(max) {
+  return Math.floor(Math.random() * max); 
+};
+
+// See http://stackoverflow.com/questions/1038746/equivalent-of-string-format-in-jquery
+String.prototype.startsWith = function (prefix) {
+  return (this.substr(0, prefix.length) === prefix);
+};
+// See http://stackoverflow.com/questions/280634/endswith-in-javascript/2548133#2548133
+String.prototype.endsWith = function(suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+
+//------------------------------------------------------------------------
+// Add query string parameter if not present, or update if present.
+// See http://stackoverflow.com/a/6021027
+// This version does not account for "#", but it's good enough for setting
+// rendition widths for <img> src URLs.
+function _cstmFunc_UpdateQueryStringParameter(uri, key, value) {
+  var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+  var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+  if (uri.match(re)) {
+    return uri.replace(re, '$1' + key + "=" + value + '$2');
+  }
+  else {
+    return uri + separator + key + "=" + value;
+  }
+}
+
+//------------------------------------------------------------------------
+// See http://stackoverflow.com/questions/901115/get-query-string-values-in-javascript
+function _cstmFunc_GetQuerystrings() {
+  var urlParams = {};
+  var match,
+      pl     = /\+/g,  // Regex for replacing addition symbol with a space
+      search = /([^&=]+)=?([^&]*)/g,
+      decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+      query  = window.location.search.substring(1);
+
+  while (match = search.exec(query))
+     urlParams[decode(match[1])] = decode(match[2]);
+     
+  return urlParams;
+}
+
+//------------------------------------------------------------------------
+// Determine if in edit mode
+// See http://sharepoint.stackexchange.com/questions/12792/how-do-i-know-if-the-page-is-in-edit-mode-from-javascript
+//------------------------------------------------------------------------
+function _cstmFunc_IsNotEditmode() {
+  return (!(typeof(PageState) === "object" && PageState.ViewModeIsEdit === "1"));
+}
+
+
+//------------------------------------------------------------------------
+// Utility functions that require jQuery
+
+(function($) {
+
+//------------------------------------------------------------------------
+// Make all child divs have the same height based on tallest.
+// Need to do call this in $(window).load() instead of $(document).ready() 
+// so element heights are correct on Chrome (because images have loaded).
+//------------------------------------------------------------------------
+function _cstmFunc_SetSameHeights(selector) {
+  $(window).load( function() {
+    _cstmFunc_SetSameHeightsNow(selector);
+  });
+}
+
+function _cstmFunc_SetSameHeightsNow(selector) {
+  if (_cstmFunc_IsNotEditmode() && $(selector).length > 0) {
+    var tallest = _cstmFunc_GetTallest(selector, false);
+    $(selector).height(tallest);
+  }
+}
+
+function _cstmFunc_GetTallest(selector, useOuter) {      
+  // Find height of tallest element
+  // see http://stackoverflow.com/questions/5784388/jquery-get-max-width-of-child-divs
+  var tallest = Math.max.apply(Math, $(selector).map(function(){
+      if (useOuter) {
+        return $(this).outerHeight(true);
+      }
+      return $(this).height(); 
+    }).get());
+    
+  return tallest;
+}
+
+// Make things square: set height to be the same as width
+function _cstmFunc_SetHeightFromWidth(selector) {
+  if (_cstmFunc_IsNotEditmode() && $(selector).length > 0) {
+    $(selector).each( function() {
+      $(this).css({ "height":$(this).width() + "px" });
+    });
+  }
+}
+
+//------------------------------------------------------------------------
+// Process external links.
+// This implements target="_blank" for XHTML-Strict for all external URLs.  
+// See http://www.electrictoolbox.com/jquery-open-offsite-links-new-window/
+//------------------------------------------------------------------------
+function _cstmFunc_ProcessLinks(selector) {
+  if (_cstmFunc_IsNotEditmode()) {
+    $(selector).filter(function () {
+      // find all links that have a hostname that doesn't match the current location
+      return this.hostname && this.hostname.toLowerCase() !== location.hostname.toLowerCase();
+    }).each(function () {
+    
+
+      var url = $(this).attr("href");
+
+      // ......................................................................
+      // Process YouTube single video links
+      // Get the video ID for links that have "://www.youtube.com/watch?v=" or "://youtu.be/"  
+      var videoID = cstmUtils.Media.GetYouTubeVideoID(url);
+      if (videoID != "") {
+
+        // Check if embedding instead of popup
+        if ($(this).parents(".cstm-videoembed").length > 0)
+        //|| $(window).width() <= 751) 
+        {
+          // Replace with embed code
+          $(this).replaceWith(cstmUtils.Media.GetYouTubeEmbedCode(videoID));
+        }
+        else {
+
+          $(this).click(function (e) {
+            e.preventDefault();
+
+            // Display YouTube videos on a fancybox. 
+            cstmUtils.Media.FancyboxForYoutube(this.title, videoID);
+          });
+
+          // Get video thumbnail and title
+          if ($(this).hasClass("nothumblink")) {
+            // Show play icon unless it's a button
+            if (!$(this).hasClass("button")) { 
+              cstmUtils.Media.AddVideoPlayIcon(this);
+            }
+          }
+          else {
+            cstmUtils.Media.SetYouTubeThumbLinks(this, videoID);
+          }
+        }
+      }
+      else {    
+        // ......................................................................
+        // Open all other external links on another window/tab
+        /* Comment out this functionality, per client request.
+        $(this).click(function (e) {
+          e.preventDefault();
+          
+          // Open new window
+          window.open(this.href);
+        });
+        */
+      }
+    });
+  }
+}
+
+//==========================================================================
+// Perform initializations when DOM is ready.
+//==========================================================================
+$(function () {
+
+
+  
+  if (!_cstmFunc_IsNotEditmode()) {
+
+    //------------------------------------------------------------------------
+    // Show author-related page elements
+    $("body").removeClass("cstm-public");
+  }
+
+
+  //------------------------------------------------------------------------
+  // Main navigation
+
+  function _cstmFunc_ProcessNavTopLevel(topLevelContainerUL, maxContainerWidth) {
+    // Process all top-level except for edit link
+    var toplevel = $(topLevelContainerUL).find(" > li:not(.ms-listMenu-editLink)");    
+    
+    // Reset padding for top-level items
+    $(toplevel).find('> a').each(function() {
+      $(this).find('> .additional-background').css({'padding-left':'0', 'padding-right':'0'});
+    });
+    
+    // Adjust padding for top-level items
+    var tabwidths = $(topLevelContainerUL).width();  
+    var numitems = $(toplevel).length;
+    var availspace = maxContainerWidth - tabwidths;
+    availspace -= 4;  // Adjust for % width inconsistencies with Firefox
+    var padspace = Math.floor((availspace / numitems) / 2);
+    $(toplevel).find('> a > .additional-background').css({'padding-left':padspace + 'px', 'padding-right':padspace + 'px'});
+    //var remainder = availspace - (padspace * 2 * numitems);
+    //$(toplevel).last().find('> a').css({'padding-right':(padspace + remainder) + 'px'});
+  }
+  
+  // :::::::::: Main navigation 
+  $(".cstm-masthead .cstm-mainnav ul.root").each( function() {    
+    // Mark the last top-level item that isn't an edit-menu link.
+    // Right-justify dropdown of last and 2nd-to-last top-level items.
+    var toplevel = $(this).find(" > li:not(.ms-listMenu-editLink)");
+    $(toplevel).last().addClass("last rightjustify");
+    $(toplevel).last().prev().addClass("rightjustify");
+        
+    // Split submenu lists into columns in dropdown
+    $(this).find('> li > ul.dynamic').each(function() {       
+      if ($(this).find('li').length > 11) {
+        $(this).qEasyListSplitter({ 
+          colNumber: 2,
+          direction: 'vertical'
+        });
+      }
+    });
+  });
+  
+  /* hovers */
+  function _cstmFunc_AdjustMainNavHovers() {
+    if ($('.cstm-masthead .cstm-minimal').is(':visible')) {
+      $('.cstm-mainnav ul.root > li').off('mouseenter mouseleave');
+      $('.cstm-mainnav').off('mouseleave');
+    }
+    else {      
+      $('.cstm-mainnav ul.root > li').on('mouseenter mouseleave', function() {
+          var nav = this;
+          $.doTimeout('cstm-mainnav', 50, function() {
+            $('.cstm-mainnav ul.root > li > .dynamic').finish();
+            $(nav).siblings().children('.dynamic').hide();
+            $(nav).children('.dynamic').show();
+          });
+      });
+      
+      $('.cstm-mainnav').on('mouseleave', function() {
+        var nav = this;
+        $.doTimeout('cstm-mainnav', 50, function() {
+          $(nav).find('ul.root > li > .dynamic').finish().fadeOut(150);
+        });
+      });
+    }
+  }
+
+  
+  // :::::::::: Adjustments for viewport 
+  $(".cstm-masthead .cstm-minimal").on("click", function(e) {
+    e.preventDefault();
+    
+    // Close search if it's open
+    $(".cstm-masthead .cstm-search.active > .cstm-toggle").click();
+    
+    // Show the mainnav
+    $(".cstm-masthead .cstm-mainnav").finish().slideToggle(200);
+    $(this).toggleClass('active');
+  });
+  
+  $(".cstm-masthead .cstm-mainnav ul.root > li > .dynamic").each(function() {
+    // Add submenu button for smaller viewports
+    $(this).before('<a href="#" class="cstm-toggle cstm-icon"></a>');
+    
+    // Set click handler for new button
+    $(this).siblings('a.cstm-toggle').on('click', function(e) {
+      e.preventDefault();
+      
+      // Close any active submenu
+      $(this).parent().siblings().find(".cstm-toggle.active").each(function() {
+        $(this).removeClass("active");
+        $(this).siblings(".dynamic").finish().slideToggle(200);
+      });
+      
+      // Toggle this submenu 
+      $(this).siblings(".dynamic").finish().slideToggle(200);
+      $(this).toggleClass('active');
+    });
+  });  
+  
+  //(this gets run at least once always by _cstmFunc_AdjustForViewport)
+  function _cstmFunc_AdjustNavForViewport() {
+    // Mainnav
+    _cstmFunc_ResetMainNavToggle();
+    $(".cstm-masthead .cstm-mainnav").finish().css("display","");  // reset hide/unhide state
+    _cstmFunc_ProcessNavTopLevel(".cstm-masthead .cstm-mainnav ul.root", $(".cstm-masthead .cstm-mainnav").width());
+    _cstmFunc_AdjustMainNavHovers();
+  }
+    
+  function _cstmFunc_ResetMainNavToggle() {
+    $('.cstm-masthead').find("ul.root .cstm-toggle.active").click();
+    $('.cstm-masthead').find(".cstm-minimal.active").click();
+  }
+
+  
+  // ------------------------------------------------------------------------
+  // Search toggle
+  
+  $(".cstm-masthead .cstm-search > .cstm-toggle").click(function(e) {
+    e.preventDefault();
+    
+    // Close mainnav if it's open on smaller viewport
+    _cstmFunc_ResetMainNavToggle();
+    
+    // Set active class
+    $(this).parent().toggleClass('active');
+    
+    // trigger click to the input box and set focus to it
+    // (see http://stackoverflow.com/a/3383468)    
+    $(this).parent('.active').find('.ms-srch-sb > input').eq(0).click().focus(); 
+    return false;
+  });
+  
+  // ------------------------------------------------------------------------
+  // Widgets on right rail
+  
+  $(".cstm-widget > h3 a").click(function(e) {
+    e.preventDefault();
+    $(this).closest(".cstm-widget").toggleClass("expand");
+  });
+  
+  // ------------------------------------------------------------------------
+  // Footer and Copyright
+
+  /* (now using footerlinks.js instead)
+  if (_cstmFunc_IsNotEditmode()) {
+    cstmSpUtils.NavTerms.init(
+      "WUSTLEng FooterNav", 
+      ".cstm-footer .cstm-footerlinks",
+      function() {
+        // Setup columns
+        $('.cstm-footer .cstm-footerlinks .navterms').qEasyListSplitter({ 
+          colNumber: 3,
+          direction: 'vertical'
+        });        
+      }
+    );
+  }
+  */
+  
+  $("#cstm-footer .copyright .current").html( function() {
+    return((new Date()).getFullYear());
+  });
+  
+  //------------------------------------------------------------------------
+  // Open pdf files in a new window
+
+  $('a[href$=".pdf"]').click(function (e) {
+    e.preventDefault();
+    window.open(this.href);
+  });
+
+  //------------------------------------------------------------------------
+  // Generic tabs
+
+  if (_cstmFunc_IsNotEditmode()) {
+
+    $('.cstm-gentabs.sameheights').each( function() {
+      // Set same heights for tab content
+      var tabcontents = $(this).find('> div:not(.indexstrip)');
+      tabcontents.css('height','');
+      _cstmFunc_SetSameHeightsNow(tabcontents);
+    });
+    
+    $('.cstm-gentabs').each( function() {
+      var container = this;
+      
+      // Generate index strip from marked child elements
+      $(container).prepend('<div class="indexstrip"/>');
+      var numItems = $(container).find('> div a.index').length;
+      var percentGap = 0.4;
+      var percentWidth = ((100.0 - ((numItems -1) * percentGap)) / numItems) + "%";
+      var ctr = 0;
+      $(container).find('> div a.index').each( function() {
+        var slideNum = 'slide' + ctr;
+        var obj = $(this).clone();
+        $(obj).removeClass("index");
+        if ($(this).next('div').length > 0) {
+          $(this).parent().addClass(slideNum);
+          $(obj).addClass(slideNum);
+        }
+        else {
+          $(obj).addClass('notabcontent');
+        }
+        $(container).children('.indexstrip').append(obj);
+        ctr++;
+      });
+      
+      // Set click handlers
+      $(container).find('> .indexstrip > a').click( function(e) {
+        if (!$(this).hasClass('active') && !$(this).hasClass('notabcontent')) {          
+          e.preventDefault();
+          
+          // Deactivate any currently-active index
+          $(container).find('> .active').removeClass('active');
+          $(this).siblings('.active').removeClass('active');
+          
+          // Activate clicked index
+          var slideClass = $(this).attr('class');
+          $(container).find('> div.' + slideClass).addClass("active");
+          $(this).addClass('active');
+          
+          return false;
+        }
+      });
+      
+      // Initialize first item as active
+      $(container).find('> .indexstrip > a:first-child').click();
+      
+    });
+  }  
+  
+  
+  //------------------------------------------------------------------------
+  // Adjust behaviors if viewport is resized 
+
+  function _cstmFunc_AdjustForViewport() {
+    if (_cstmFunc_IsNotEditmode()) {
+      _cstmFunc_AdjustNavForViewport();
+      
+      // Select image rendition width based on current width
+      /*
+      $('img:not(.norendition)').each(function() {
+        var src = $(this).attr('src');
+        var chksrc = src.toLowerCase();
+        if (!chksrc.startsWith('/_catalogs/masterpage/wustlengr')
+          && !chksrc.startsWith('/_layouts/15/')) 
+        {
+          src = _cstmFunc_UpdateQueryStringParameter(src, 'Width', $(this).width());
+          $(this).attr('src', src);
+        }
+      });
+      */
+      $('img.dorendition, .dorendition img:not(.norendition)').each(function() {
+        var src = $(this).attr('src');
+        var container = $(this).parent();
+        var theWidth = 0;
+        while (container.length > 0 && theWidth == 0) {
+          theWidth = $(container).width();
+          container = $(container).parent();
+        }
+        if (theWidth > 0) {
+          src = _cstmFunc_UpdateQueryStringParameter(src, 'Width', theWidth);
+          $(this).attr('src', src);
+        }
+      });
+    }
+  }
+  
+  if (typeof(_cstm_keepstatic) == "undefined" || _cstm_keepstatic == false) {
+    _cstmFunc_AdjustForViewport();  
+    
+    $(window).resize( function() {
+      _cstmFunc_AdjustForViewport();  
+    });
+  }
+  
+    // add class to banner when it contains an image.
+    // this will eliminate a space which occurs between the image and nav menus
+    // bug list item #66
+  $(".cstm-banner").has("img").addClass("banner-image-nospace");
+    
+});
+
+
+$(window).load( function() {
+
+  //------------------------------------------------------------------------
+  // Process external links
+  // (need to do this after load so analytics.js handlers can get set first)
+
+  _cstmFunc_ProcessLinks("a");
+  
+  //------------------------------------------------------------------------
+  // Click handler for input text boxes (excluding edit-mode textboxes)
+
+  if (_cstmFunc_IsNotEditmode()) {
+    $(".cstm-bodywrap input[type='text']:not(.ms-formfieldcontainer input)").each(function () {
+      // Save initial value of input boxes
+      $(this).data("initial", $(this).val());
+  
+      // Text input click/blur handler
+      $(this).click(function () {
+        if ($(this).val() === $(this).data("initial")) {
+          $(this).val("");
+        }
+      });
+  
+      $(this).blur(function () {
+        if ($(this).val().length == 0) {
+          $(this).val($(this).data("initial"));
+        }
+      });
+    });
+  }
+  
+});
+
+})(jQuery);

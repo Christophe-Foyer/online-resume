@@ -1,0 +1,1246 @@
+﻿/*Mobile fixes*/
+@import url("/Style Library/css/mobile_fixes.css");
+
+
+/*** Header ***/
+div.cstm-bodywrap div.cstm-banner p {
+	font-size:1.8em;
+	padding:0.2em 0 0.1em 1em;
+	background-image:url("/Style%20Library/Images/grid_noise.png");
+	margin-bottom:0;
+	border-top:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+}
+div.cstm-bodywrap div.cstm-banner p:empty {
+	display:none;
+}
+div.cstm-bodywrap div.cstm-banner p a {
+	color:#555;
+}
+div.cstm-bodywrap div.cstm-banner p a:hover {
+	text-decoration:none;
+}
+.cstm-masthead .branding > a.co-branding {
+	display: block;
+    position: absolute;
+    font-size: 1.0em;
+    top:35px; /*top: 50px;*/
+}
+/*some 11/17 updates to match new sites.wustl design*/
+div.cstm-masthead {
+	border-top-width:43px;
+	background:#fff;
+}
+div.cstm-masthead div.topband {
+	top:-47px;
+	left:3%;
+}
+@media screen and (max-width: 950px) {
+	div.cstm-masthead div.topband {
+		left:0;
+	}
+}
+div.cstm-masthead div.branding {
+	line-height:105px;
+}
+div.cstm-masthead div.branding > a {
+	margin-left:3%;
+}
+div.cstm-masthead > div.centerwrap {
+	background:none;
+	height:106px;
+}
+div.cstm-mainnav {
+	top:106px;
+}
+
+
+/**** Top Nav ****/
+
+div.cstm-mainnav ul.root > li.static > a, div.cstm-mainnav ul.root > li > .dynamic > ul > li > a, div.cstm-mainnav ul.root > li > ul.dynamic > li > a, div.cstm-mainnav ul.root > li a {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 0.95em;
+}
+span.dynamic.menu-item.ms-core-listMenu-item {
+	color:#9e0918;
+	text-transform:uppercase;
+	margin-bottom:0.3em;
+}
+div.ms-core-listMenu-horizontalBox span.dynamic.menu-item.ms-core-listMenu-item span.dynamic-children.additional-background {
+	cursor:default;
+	font-size:0.95em;
+}
+div.cstm-mainnav ul.root > li.hover > a > .additional-background, div.cstm-mainnav ul.root > li.selected:hover > a > .additional-background, div.cstm-mainnav ul.root > li > .dynamic {
+	border-radius:2px;
+}
+div.cstm-mainnav ul.root > li.hover > a > span > span.menu-item-text {
+	text-decoration:underline;
+}
+.cstm-mainnav ul.root > li > div.dynamic.numcolumns1 > ul.column.listCol1 {width:auto;}
+
+div.cstm-mainnav ul.root > li.hover > div.dynamic {z-index:9999;}
+
+
+
+/***** Second Nav *****/
+
+div.cstm-navpanel {
+	font-weight:normal;
+}
+div.cstm-navpanel .ms-core-navigation {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 0.95em;
+}
+div.cstm-navpanel ul.root > li > ul.dynamic {
+	padding:0;
+	margin-left:-15px;
+	top:51px!important;
+}
+div.cstm-navpanel ul.root > li > ul.dynamic a.menu-item {
+	padding: 7px 20px 8px 20px;
+	font-size:0.9em;
+	border-bottom:1px solid #ebebeb;
+}
+ul.dynamic > li.dynamic > a.menu-item:hover {
+	background:#f2f2f2;
+}
+div.cstm-mainnav ul.root > li li a.menu-item:hover {
+	background:none;
+}
+div.cstm-navpanel ul.root > li > a.menu-item {
+	font-size:0.95em;
+	height:50px;
+	line-height:47px;
+	color:#666;
+}
+div.cstm-navpanel ul.root > li.selected > a.menu-item {
+	background-color:#959595;
+	color:#fff;
+	font-weight:normal;
+	border-top:1px solid #ccc;
+}
+div.cstm-tiles > div .cstm-tilename > h4 {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight:normal;
+}
+#ctl00_PlaceHolderHorizontalNav_SecondaryNav_QuickLaunchNavigationManager div.ms-core-listMenu-horizontalBox li.static > span.ms-core-listMenu-item {
+	height:50px;
+	padding:0;
+	margin:0;
+	display:block;
+	line-height:47px;
+	font-size:0.95em;
+	color:#999;
+	border:none;
+}
+div .cstm-navpanel ul.root > li > a.menu-item > span {
+	padding-left:0;
+	margin: 0 10px;
+}
+div.cstm-navpanel div.ms-core-listMenu-horizontalBox, div.cstm-navpanel div.ms-core-listMenu-horizontalBox ul.root.ms-core-listMenu-root {
+	width:100%;
+}
+div.ms-core-listMenu-horizontalBox span span.additional-background.dynamic-children {
+	padding-right:0;
+	vertical-align:middle;
+	line-height:1.2em;
+	display:inline-block;
+}
+div.cstm-navpanel ul.root > li {
+	width:auto!important;
+	/*padding-left:30px;*/
+	max-width:33%;
+}
+@media screen and (max-width: 890px) {
+	div.cstm-navpanel ul.root > li {
+		max-width:100%;
+	}
+	div.cstm-navpanel ul.root > li > a.menu-item {
+		height:auto;
+	}
+}
+div.ms-core-listMenu-horizontalBox .dynamic-children.additional-background {
+	padding-right:0;
+}
+div.cstm-navpanel ul.root > li ul li {
+	text-align:left;
+}
+/* two items */
+div.cstm-navpanel ul.root > li:first-child:nth-last-child(2),
+div.cstm-navpanel ul.root > li:first-child:nth-last-child(2) ~ li {
+    width: 50%!important;
+    text-align:center;
+}
+
+/* three items */
+div.cstm-navpanel ul.root > li:first-child:nth-last-child(3),
+div.cstm-navpanel ul.root > li:first-child:nth-last-child(3) ~ li {
+    width: 33.33%!important;
+    text-align:center;
+}
+
+/* four items */
+div.cstm-navpanel ul.root > li:first-child:nth-last-child(4),
+div.cstm-navpanel ul.root > li:first-child:nth-last-child(4) ~ li {
+    width: 25%!important;
+    text-align:center;
+}
+/* five items */
+div.cstm-navpanel ul.root > li:first-child:nth-last-child(5),
+div.cstm-navpanel ul.root > li:first-child:nth-last-child(5) ~ li {
+    width: 20%!important;
+    text-align:center;
+}
+div.cstm-navpanel ul.root > li:first-child:nth-last-child(6),
+div.cstm-navpanel ul.root > li:first-child:nth-last-child(6) ~ li {
+    width: 16.66%!important;
+   	text-align:center;
+}
+div.cstm-navpanel ul.root > li:first-child:nth-last-child(7),
+div.cstm-navpanel ul.root > li:first-child:nth-last-child(7) ~ li {
+    width: 14.25%!important;
+   	text-align:center;
+}
+div.cstm-navpanel ul.root > li:first-child:nth-last-child(8),
+div.cstm-navpanel ul.root > li:first-child:nth-last-child(8) ~ li {
+    width: 12.5%!important;
+   	text-align:center;
+}
+div.cstm-imgmatrix div.tile div.overlay {
+	z-index:1; /*fixes second nav dropdowns appearing underneath*/
+}
+
+
+
+/***** Body Content *****/
+div.ms-webpart-cell-vertical, div.ms-webpart-chrome-vertical {/*added 2/13/2017 to fix incorrect page widths for horizontal slideshow (about stl)*/
+	display:block;
+}
+div.ms-core-navigation {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+div.cstm-bodywrap h1, div.cstm-bodywrap h1.ms-h1, div.cstm-bodywrap .ms-WPBody h1 {
+	color:#444;
+	font-family: "Libre Baskerville", "Times New Roman", serif;
+	font-weight: normal;
+}
+
+div.cstm-bodywrap {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+div.cstm-intro {
+	/*font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+	font-weight: normal;
+	color:#555;
+}
+
+div.cstm-maincontent a {
+	color: #9e0918;
+	font-weight:normal;
+}
+div.cstm-content a {
+	font-weight:normal;
+}
+
+div.cstm-bodywrap .cstm-maincontent h4 {
+	font-family:"Open Sans";
+	font-size:1.15em;
+	/*color:#555;*/
+}
+div.cstm-bodywrap .cstm-maincontent h3 {
+	font-family: "Libre Baskerville", "Times New Roman", serif;
+	font-weight: normal;
+	font-size: 1.25em;
+}
+div.cstm-bodywrap .cstm-maincontent h2 {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: normal;
+	font-size: 1.7em;
+	color:#444;
+}
+div.cstm-maincontent div.cstm-filters h3, div.cstm-maincontent div.cstm-keywords h3, div.cstm-maincontent div.cstm-searchparms h3 {
+	font-family:inherit;
+}
+div.cstm-tiles > div {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+div.cstm-intro .byline .separator {
+	border:none;
+}
+div.cstm-intro .subhead {
+	margin:0 0 1em;
+	font-size:1.05em;
+}
+div.cstm-intro .subhead p {
+	margin:0;
+}
+div.cstm-programs .slides .text, div.cstm-programs .slides .quote, div.cstm-programs .slides .name {
+	font-family:"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight:normal;
+}
+div.twocols {
+	display:inline-block; width:45%; vertical-align:top;
+}
+div.twocols.first {
+	margin-right:5%;
+}
+div.threecols {
+	display:inline-block; width:30%; vertical-align:top;
+}
+div.threecols.first {
+	margin-right:5%;
+}
+
+/** unslider styles */
+div.unslider ul li img {
+	margin:20px 100px;
+}
+div.unslider ul li div.unslider_quote {
+	margin:40px 100px;
+	font-size:1.4em;
+	font-style:italic;
+	font-family:"Libre Baskerville", serif;
+	letter-spacing:0.5px;
+	line-height:1.5em;
+	text-align:center;
+}
+div.unslider ul li div.unslider_name {
+	margin:5px 100px;
+	font-weight:bold;
+	letter-spacing:0.5px;
+	text-align:center;
+}
+div.unslider ul li div.unslider_title {
+	margin:0 100px;
+	color:#ddd;
+	font-style:italic;
+	text-align:center;
+}
+div.unslider a.unslider-arrow {
+	margin:-200px 0 0 0;
+	background:rgba(0, 0, 0, 0.3);
+	padding:10px;
+}
+div.unslider a.unslider-arrow:hover {
+	opacity:0.8;
+}
+div.unslider a.unslider-arrow div.arrow-graphic {
+	height:0;
+	width:0;
+	text-indent:-999em;
+	border-top:30px solid transparent;
+	border-bottom:30px solid transparent;
+}
+div.unslider a.unslider-arrow.next div.arrow-graphic {
+	border-left:30px solid #eee;
+}
+div.unslider a.unslider-arrow.prev div.arrow-graphic {
+	border-right:30px solid #eee;
+}
+div.cstm-imgmatrix.icons div.tile {
+	width:25%;
+	font-size:0.9em !important;
+	text-transform:uppercase;
+	letter-spacing:1px;
+	line-height:1.5em;
+	color:#555;
+}
+div.cstm-imgmatrix.icons.three div.tile {
+	width:33%;/*margin:0 4%; this was set for new global page but broke dept homepage*/
+	height:auto;
+	min-width:250px;
+}
+@media screen and (max-width: 900px) {
+	div.cstm-imgmatrix.icons div.tile {
+		float:none;
+		display:inline-block;
+		vertical-align:top;
+		width:50%;
+	}
+}
+@media screen and (max-width: 600px) {
+	div.cstm-imgmatrix.icons div.tile {
+		width:100%;
+	}
+}
+div.cstm-imgmatrix.icons div.tile div.number {
+	font-size:4em;
+	font-family:"Libre Baskerville";
+	margin:20px 0 20px;
+	font-weight:normal;
+	color:#9e0918;
+	line-height:1em;
+}
+div.cstm-maincontent a.gray_button {
+	padding:10px 20px;
+	color:#fff;
+	background-color:#666;
+	display:inline-block;
+	margin:1em;
+}
+div.cstm-maincontent a.gray_button:hover {
+	color:#9e0918;
+	background-color:#eee;
+}
+/*
+turned this off because of dept homepages
+div.ms-rtestate-field p {
+	margin:inherit;
+}
+
+
+	font-size:4em;
+	font-family:"Libre Baskerville";
+	margin:20px 0 20px;
+	font-weight:normal;
+	color:#9e0918;
+	line-height:1em;
+}
+
+turned this off because of dept homepages
+div.ms-rtestate-field p {
+	margin:inherit;
+}*/
+
+
+/*** Newsbox / Quotebox (dept homepages and engr pages ****/
+a.newsbox {
+	float:left;
+	min-height:575px;
+	width:380px;
+	margin:0 3%;
+	background-color:#3c9492;
+	vertical-align:top;
+	text-decoration:none;
+}
+a.newsbox:hover {
+	text-decoration:none;
+	opacity:0.8;
+}
+a.newsbox p {
+	color:#f5f5f5;
+	padding:0 20px;
+}
+a.newsbox p.readthestory {
+	font-size:0.9em;
+	text-transform:uppercase;
+	font-weight:bold;
+}
+a.quotebox {
+	float:left;
+	min-height:575px;
+	width:380px;
+	margin:0 3%;
+	background-color:#fc0;
+	position:relative;
+	vertical-align:top;
+	text-decoration:none;
+}
+a.quotebox:hover {
+	text-decoration:none;
+	opacity:0.8;
+}
+a.quotebox div.ldquo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 50px;
+    color: #f5f5f5;
+    font-size: 3em;
+    font-family: "Libre Baskerville";
+    background-color: #eb0;
+    text-align: center;
+    padding: 0px 0 0 0;
+    line-height:1.6em;
+
+}
+a.quotebox p {
+	margin:45px 25px 205px 25px;
+	font-style:italic;
+	font-family:"Libre Baskerville";
+	font-size:1.45em;
+	line-height:1.6em;
+	letter-spacing:0.3px;
+	color:#eee;
+}
+a.quotebox div.bottom {
+	position:absolute;
+	height:200px;
+	bottom:0;
+	left:0;
+	width:100%;
+}
+a.quotebox div.bottom img {
+	float:left;
+	width:auto;
+	height:200px;
+}
+a.quotebox div.bottom h3 {
+	font-family:"Open Sans";
+	margin:0 10px 0 205px;
+	text-transform:uppercase;
+	font-size:0.95em;
+	font-weight:bold;
+	color:#444;
+}
+a.quotebox div.bottom h4 {
+	font-size:0.9em;
+	font-weight:normal;
+	margin:15px 10px 0 205px;
+	color:#444;
+}
+ul.cbs-List {
+	display:block;
+}
+
+/*** new 9/9/16 styles for newsbox ***/
+div.new9916 {
+	text-align:center;
+}
+div.new9916 a.newsbox {
+	float:initial;
+	display:inline-block;
+	min-height:575px;
+	vertical-align:top;
+	text-decoration:none;
+	position:relative;
+	background-repeat:no-repeat;
+	width:420px;
+	margin:0 1%;
+}
+div.new9916 a.newsbox:hover {
+	text-decoration:none;
+	opacity:0.8;
+}
+div.new9916 a.newsbox div.title {
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    padding: 30px 20px 10px 20px;
+    text-align: center;
+    font-family: "Libre Baskerville", serif;
+    font-size: 1.2em;
+    min-width:90.5%;
+    background: #444;/*ie8,9*/
+    background: linear-gradient(0deg, rgba(0,0,0,0.65) 80%, rgba(0,0,0,0));
+}
+div.new9916 a.newsbox div.readstory {
+	font-weight:bold;
+	text-transform:uppercase;
+	letter-spacing:1px;
+	font-family:'Open Sans', sans-serif;
+	padding: 10px 0;
+	font-size: 0.8em;
+}
+a.quotebox p, a.quotebox div.bottom {
+	text-align:left;
+}
+div.new9916 a.quotebox div.bottom img {
+	float:right;
+}
+div.new9916 a.quotebox {
+	width:420px;
+	margin:0 1%;
+	float:initial;
+	display:inline-block;
+}
+div.new9916 a.quotebox:hover {
+	text-decoration:none;
+}
+div.new9916 a.quotebox p {
+	margin:50px 45px 205px 45px;
+	font-size:1.5em;
+	line-height:2em;
+	letter-spacing:0.3px;
+}
+
+div.new9916 a.quotebox div.bottom h3 {
+	margin:0 215px 0 10px;
+	text-align:right;
+	font-size:1.1em;
+}
+div.new9916 a.quotebox div.bottom h4 {
+	margin:15px 215px 0 10px;
+	text-align:right;
+	font-size:1em;
+}
+div.new9916 a.readmoredeptnews {
+    display: inline-block;
+    color: #333;
+    font-size:1.1em;
+    letter-spacing:1px;
+    font-family:"Libre Baskerville", serif;
+    margin:10px 0;
+    padding:1% 2%;
+}
+@media screen and (min-width: 1100px) {	
+	ul.cbs-List .cstm-imgmatrix {
+		margin:0 -330px 0 -20px;
+	}
+}
+@media screen and (max-width: 600px) {
+	a.newsbox, a.quotebox, div.new9916 a.newsbox, div.new9916 a.quotebox {
+		width:100%;
+		background-size:cover;
+	}
+	div.new9916 a.newsbox div.title {
+		min-width:95%;
+		padding:30px 10px 10px 10px;
+	}
+	div.cstm-imgmatrix.icons div.tile {
+		width:100%;
+		height:auto;
+	}
+	div.cstm-imgmatrix.icons div.tile div.number {
+		margin-bottom:0;
+	}
+}
+.cstm-content .link_button {
+	border:1px solid #888;
+	display:inline-block;
+	padding:5px 25px;
+	border-radius:5px;
+	background-color:#fff;
+	color:#444;
+	font-size:1.1em;
+	text-transform:uppercase;
+	letter-spacing:1px;
+}
+.cstm-content .link_button:hover {
+	background-color:#9e0918;
+	color:#fff;
+}
+@media screen and (min-width: 1100px) {	
+	.sidebarExpandExceptMobile {
+		margin:0 -300px 0 0;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+/**** Widget *****/
+
+div.cstm-bodywrap h3.icon-message, div.cstm-bodywrap h3.icon-cloud, div.cstm-bodywrap h3.icon-message, div.cstm-bodywrap h3.icon-link {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size:0.85em;
+}
+div.cstm-aside {
+	margin-top:0em;
+}
+div.cstm-aside a {
+	color:#9e0918;
+}
+div.cstm-aside h3 a {
+	color:#000;
+	font-size:1em;
+}
+div.cstm-widget {
+	font-size:0.95em;
+}
+div.cstm-section {
+	font-size:1em;
+}
+div.cstm-section ul {
+	padding-left:20px;
+}
+a.widget_button {
+	width:100%;
+	display:block;
+	font-size:1.3em;
+	font-weight:bold;
+	text-align:center;
+	padding:0.7em 5px;
+	margin-bottom:1em;
+}
+div.cstm-content a.widget_button.red {
+	color:#eee;
+	background-color:#9e0918;
+	padding:0.7em 0;
+}
+div.cstm-content a.widget_button.red:hover {
+	color:#fff;
+}
+div.cstm-content a.widget_button.gray {
+	color:#9e0918;
+	background-color:#ddd;
+	padding:0.7em 0;
+}
+div.cstm-content a.widget_button.teal {
+	background-color:#67c8c7;
+	color:#fff;
+	padding:0.7em 0;
+}
+div.cstm-content a.widget_button.blue {
+	background-color:#005f85;
+	color:#fff;
+	padding:0.7em 0;
+}
+div.cstm-content a.widget_button.plum  {
+	background-color:#172752;
+	color:#fff;
+	padding:0.7em 0;
+}
+div.cstm-content a.widget_button.purple {
+	background-color:#622466;
+	color:#fff;
+	padding:0.7em 0;
+}
+div.cstm-content a.widget_button.gold {
+	background-color:#f8be15;
+	color:#444;
+	padding:0.7em 0;
+}
+div.cstm-content a.widget_button.orange {
+	background-color:#d15f27;
+	color:#fff;
+	padding:0.7em 0;
+}
+div.cstm-content a.widget_button.green {
+	background-color:#789b4a;
+	color:#fff;
+	padding:0.7em 0;
+}
+
+
+
+
+
+
+
+
+
+/**** Faculty Profile *****/
+div.cstm-bodywrap div.cstm-contact p {
+	color:#444;
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+div.cstm-bodywrap div.cstm-contact h2 {
+	font-size:1.5em;
+	margin-bottom:10px;
+}
+div.cstm-research-tagline p {
+	font-size:0.85em;
+}
+div.cstm-searchparms a.cstm-button {
+	font-family:"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+div.cstm-profile-education {
+	width:293px;
+	padding-top:10px;
+	margin-top:10px;
+	font-size:0.9em;
+	border-top:1px solid #9e0918;
+}
+div.cstm-profile-education h3 {
+	margin:5px 0 10px;
+}
+div.cstm-content a.cstm-button {
+	font-family:"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	min-width:4em;
+	text-align:center;
+}
+ul.cbs-List div.cstm-news h2 {
+	margin-top:0;
+}
+ul.cbs-List div.cstm-news ul {
+	padding-left:40px;
+}
+ul.cbs-List div.cstm-news ul li {
+	list-style:disc;
+}
+
+/* Sept 2017 updates*/
+div.cstm-research-img {
+	position:relative;
+	padding:0;
+	margin:0;
+	width:50%;
+}
+div.cstm-research-img img {
+	border-radius:initial;
+	height:auto;
+	width:auto;
+	float:right;
+	margin-right:2%;
+
+}
+div.cstm-research-img:before {
+	position:absolute;
+	content:'';
+	right:369px;
+	top:0px;
+	z-index:1;
+	width: 0;
+    height: 0;
+    border-left: solid 20px #e6e6e6;
+    border-bottom: solid 298px transparent;
+    border-top: solid 0px transparent;
+}
+div.cstm-research-img:after {
+	position:absolute;
+	content:'';
+	right:2%;
+	top:0px;
+	z-index:1;
+	width: 0;
+    height: 0;
+    border-right: solid 20px #e6e6e6;
+    border-top: solid 298px transparent;
+    border-bottom: solid 0px transparent;
+}
+div.cstm-highlight {
+	padding:0;
+	height:auto;
+}
+div.cstm-research-tagline {
+	margin:0 0 0 2%;
+	height:298px;
+	width:40%;
+}
+div.cstm-research-tagline p {
+	font-style:italic;
+	font-size:1em;
+}
+div.cstm-profile-education {
+	text-align:center;
+}
+div.cstm-contact {
+	width:auto;
+	text-align:center;
+}
+div.hide {
+	display:none;
+}
+@media screen and (max-width: 1100px) {
+	div.cstm-research-tagline p {
+		font-size:0.9em;
+	}
+}
+@media screen and (max-width: 900px) {
+	div.cstm-research-tagline {
+		width:45%;
+	}
+	div.cstm-research-tagline p {
+		font-size:0.8em;
+	}
+	div.cstm-highlight div.cstm-research-tagline div.vertmiddle {
+		position:relative; top:25%;
+	}
+}
+@media screen and (max-width: 600px) {
+	div.cstm-research-img {
+		position:static;
+	}
+	div.cstm-research-img:before, div.cstm-research-img:after {
+		display:none;
+	}
+	div.cstm-research-img img {
+		float:none; margin:0 auto;
+	}
+	div.cstm-highlight div.cstm-research-tagline {
+		height:auto;
+		margin:0 3%;
+		text-align:center;
+	}
+}
+
+/*** News ***/
+div.cstm-content blockquote {
+	overflow:auto;
+}
+/*** Events ***/
+div.cstm-intro div.eventdetails > div {
+	white-space:inherit;
+}
+
+
+/**** Homepage *****/
+
+div.s4-wpcell > .ms-webpart-chrome, div.s4-wpActive > .ms-webpart-chrome {
+	border:none;
+}
+div.cstm-banner table div.cstm-slides .slides > div > div {
+	font-size:2.35em;
+}
+div.cstm-newsevents-wrapper {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+div.cstm-bodywrap .cstm-maincontent div.cstm-newsevents-wrapper h3 {
+	font-family:inherit;
+	padding:1em 23% 0.75em 2%;/*0.75em 23% 0.75em 2%;*/
+	background:linear-gradient(0deg, rgba(0,0,0,0.7) 80%, rgba(0,0,0,0));
+	width:75%;
+}
+div.cstm-newsevents-wrapper a.viewmore {
+	font-size:0.95em;
+}
+div.cstm-newsevents-wrapper div.cstm-events a.viewmore {
+	font-size:1.06em;
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+div.cstm-imgmatrix div.tile {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size:1.5em;
+}
+div.cstm-imgmatrix div.tile.icon-twitter {
+	display:none;
+}
+div.cstm-imgmatrix div.tile.filler {
+	display:block;
+}
+div.cstm-footer div.cstm-social {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+div.cstm-footer a.cstm-icon.magazine-icon:after  {
+	background-image:url('https://engineering.wustl.edu/PublishingImages/homepage/magazine_white.png');
+}
+div.cstm-footer a.cstm-icon.magazine-icon:hover:after {
+	background-image:url('https://engineering.wustl.edu/PublishingImages/homepage/magazine_red.png');
+}
+div.cstm-news div.indexstrip a {
+	font-size:0.85em;
+	color:#333;
+	padding:0.75em 0;
+	line-height:1.2em;
+}
+div.cstm-events div.evtdesc a {
+	float:none;e
+}
+div.cstm-events {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight:normal;
+}
+div.cstm-news div.indexstrip a.viewmore {
+	line-height:2.2em;
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color:#959595;
+	width:100%;
+}
+div.cstm-news div.indexstrip, div.cstm-newsevents-wrapper div.cstm-events {
+	border-top:1px solid #000;
+}
+div.cstm-news div.indexstrip a {
+	border-bottom:1px solid #999;
+}
+div.cstm-newsevents-wrapper div.cstm-events li {
+	min-width:250px;
+	margin:0.75em 0;
+}
+div.cstm-newsevents-wrapper {
+	margin-top:20px; margin-bottom:20px;
+}
+div.cstm-imgmatrix div.tile .overlay {
+	line-height:1.3em;
+}
+div.cstm-imgmatrix div.tile div.overlay div.vertmiddle p {
+	margin-top:5px;
+}
+.profiles div.cstm-tiles div.vertmiddle, .programs div.cstm-tiles div.vertmiddle, div.cstm-tiles div.selected .cstm-tiledesc .vertmiddle {
+	top:40%;
+}
+div.cstm-tiles > div .cstm-tiledesc {
+	background-color: rgba(0, 0, 0, 0.3);
+	color:#fff;
+	text-shadow:1px 1px #000;
+}
+div.cstm-imgmatrix .tile h4, div.cstm-imgmatrix .tile h4.ms-h4 {
+	font-weight:normal;
+	line-height:1.1em;
+}
+div.cstm-imgmatrix .getvideo a.video .title {
+	padding:2% 3% 1%;
+	width:94.1%;
+	background:linear-gradient(0deg, rgba(0,0,0,0.7) 75%, rgba(0,0,0,0));
+}
+div.cstm-newsevents-wrapper div.cstm-events > ul {
+	margin:0;
+}
+div.cstm-newsevents-wrapper div.cstm-events > ul div.evtdesc {
+	margin-left:20%;
+}
+div.cstm-events div.evtdate em {/*added 6/5/17*/
+	display:block;
+}
+div.cstm-imgmatrix .tile .dark.overlay {
+	background-color: rgba(0,0,0,0.5);
+}
+div.cstm-imgmatrix .icon-twitter .message {
+	background-position:50% 24px;
+	background-color: rgba(221, 220, 214, 0.9);
+}
+div.cstm-imgmatrix .icon-twitter .author {
+	padding-top:90px;
+}
+div.cstm-imgmatrix .icon-twitter .text {
+	line-height:1.3em;
+}
+div.cstm-imgmatrix .tile .circle-overlay {
+	top:25%;
+	left:25%;
+	transform:none;
+}
+div.cstm-news div.cstm-gentabs > div.active > div
+{
+	background-color:#fff;
+}
+div.cstm-imgmatrix div.tile div.partial-overlay {
+	padding-top:12px;
+	background:linear-gradient(0deg, rgba(0,0,0,0.7) 80%, rgba(0,0,0,0));
+}
+div#slide_pause_container {
+	position:absolute;
+	left:45%;
+	top:40%;
+	width:120px;
+	height:105px;
+	background-color:#666;
+	opacity:0.6;
+	border-radius:25px;
+	cursor:pointer;
+}
+div#slide_pause_container:hover {
+	opacity:0.8;
+}
+div#slide_pause {
+	margin:20px 0 0 40px;
+	border-bottom:30px solid transparent;
+	border-top:30px solid transparent;
+	border-left:50px solid #fff;
+}
+/*manual text on homepage banner video, stolen from dept homepage*/
+.deptHomeBanner {
+	left:1em;
+	color:#fff;
+	position:absolute;
+	text-shadow:2px 4px 7px rgba(0, 0, 0, 0.8);
+	font-family:"Libre Baskerville", serif;
+}
+.deptHomeBanner.twolines {
+	letter-spacing:2px;
+	font-size:2.4em;
+	bottom:2em;
+	font-family:"Open Sans", sans-serif;
+}
+.deptHomeBanner.secondline {
+	bottom:1.2em;
+	left:2em;
+	color:#eee;
+	font-size:1.9em;
+	font-style:italic;
+}
+@media screen and (max-width: 540px) {
+	div.deptHomeBanner.twolines {
+		font-size:1.5em;
+	}
+	div.deptHomeBanner.secondline {
+		font-size:1.2em;
+		bottom:1.0em;
+		left:1em;
+	}
+}
+
+
+/*** Dual Degree Form ***/
+
+#ctl00_ctl51_g_fd86210b_f68d_4c38_9825_fb394c7db7a5_ctl00_formPanel table tr td {
+	padding:10px 0;
+	width:auto;
+}
+#ctl00_ctl51_g_fd86210b_f68d_4c38_9825_fb394c7db7a5_ctl00_formPanel table table tr td {
+	padding:auto;
+}
+#ctl00_ctl51_g_fd86210b_f68d_4c38_9825_fb394c7db7a5_ctl00_formPanel table tr td:first-child {
+	width:200px;
+	padding-right:1em;
+}
+#ctl00_ctl51_g_fd86210b_f68d_4c38_9825_fb394c7db7a5_ctl00_formPanel table table tr td:first-child {
+	width:auto;
+	padding:0;
+}
+#ctl00_ctl51_g_fd86210b_f68d_4c38_9825_fb394c7db7a5_ctl00_rblCitizenship {
+	min-width:250px;
+}
+
+
+
+/*** Search ***/
+div.ms-srch-result #ResultFooter {
+	display:none;
+}
+div.cstm-maincontent .ms-srch-group-content .ms-srch-hover-outerContainer {
+	left:100%!important;
+}
+div.ms-srch-item {
+	width:50%;
+}
+div.cstm-search div.searchBoxes {
+	display:none;
+	color:#fff;
+	background-color:#800;
+	font-size:15px;
+	position:absolute;
+	left:-30px;
+	top:50px;
+	width:390px;
+	padding:20px;
+}
+div.cstm-search div.searchBoxes a {
+	color:#fff;
+	text-decoration:none;
+	background-color:#9e0918;
+	border:1px solid #a12;
+	display:block;
+	padding:10px;
+	text-align:center;
+	margin-bottom:10px;
+}
+div.cstm-search div.searchBoxes a:hover {
+	border-color:#b24;
+	background-color:#600;
+}
+div.cstm-search.active div.searchBoxes {
+	display:block;
+}
+
+
+
+
+/*** YouTube Responsive Iframe Videos ***/
+div.youtube-wrap {
+	/*width:80%;*/
+	max-width:854px;
+	margin:0 auto;
+}
+div.iframe-container {
+	position:relative;
+	padding-bottom:56.25%;
+	padding-top:30px;
+	height:0;
+	overflow:hidden;
+}
+div.iframe-container iframe, div.iframe-container object, div.iframe-container embed {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
+
+
+/*** Enewsletter page ***/
+div.newsletter_box {
+	max-width:415px;
+	display:inline-block;
+	margin:0 2em 2em 0;
+}
+div.newsletter_box:nth-child(odd) {
+	margin:0 0 2em 0;
+}
+div.newsletter_box img {
+	float:left;
+	margin:0 1em 1em 0;
+}
+div.newsletter_box h3 {
+	margin-top:0;
+}
+div.newsletter_box ul {
+	margin-left:190px;
+	padding-left:0;
+}
+
+/*** Footer ****/
+div.cstm-footer .cstm-footerlinks a, div.cstm-footer .cstm-footerlinks li > span {
+	display:inline-block;
+}
+div.cstm-footer .washu-home {
+	width:300px;
+	text-align:center;
+	display:block;
+	margin-top:1em;
+}
+div.cstm-footerlinks div.columnwrap {
+	text-align:right;
+}
+div.cstm-footerlinks div.columnwrap > ul.column {
+	float:none;
+	display:inline-block;
+	vertical-align:top;
+	text-align:left;
+	width:40%;
+	min-width:200px;
+}
+
+/*************
+IE8
+*************/
+@media \0screen\,screen\9 {
+	div.cstm-mainnav UL.root LI.static:hover UL.dynamic, div.cstm-mainnav UL.root LI.static:hover div.dynamic {
+		display: block;
+	}
+	div.cstm-mainnav UL.root > LI > A span.additional-background {
+		padding: 0 30px;
+	}
+	div.cstm-news div.cstm-gentabs > .active IMG {
+		left: 0;
+		top: 0;
+	}
+	div.cstm-imgmatrix .getvideo A.video span.title, div.cstm-imgmatrix div.tile .partial-overlay, div.cstm-news .cstm-gentabs > .active H3, div.cstm-tiles > DIV div.cstm-tilename {
+		background: #333;
+	}
+	div.vertmiddle p {
+		background:#eee;
+	}
+	div.cstm-banner div.cstm-slides div.slides > DIV > DIV {
+		font-size: 2.5em;
+		background: #333;
+	}
+	div.cstm-slides div.slides > DIV > DIV.alignbottom {
+		bottom: 10px;
+		color:#eee;
+	}
+	div#zz14_V4QuickLaunchMenu, div.cstm-navpanel UL {
+		width:100%;
+	}
+	div.programs div.cstm-tiles div.cstm-tiledesc div.vertmiddle {
+		top:10%;
+	}
+	div.programs div.cstm-tiles div.cstm-tiledesc div.vertmiddle ul li {
+		background:#eee;
+	}
+	div.vertmiddle {
+		top:15%;
+		background-color:#eee;
+		color:#333;
+	}
+	div.faculty div.vertmiddle {
+		top:20%;
+	}
+	.profiles div.cstm-tiles div.vertmiddle {
+		top:10%;
+	}
+	div.cstm-navpanel UL.root > LI {
+		max-width:50%;
+	}
+	div DIV.cstm-navpanel UL {
+		width:100%;
+	}
+	/*Twitter doesnt work in IE8 anymore as of 1/28/15. Fixing it by expanding Instagram tile*/
+	div.tile.icon-twitter {
+		display:none;
+	}
+	div.tile.icon-instagram {
+		width:50%;
+	}
+	div.tile.icon-instagram img {
+		position:absolute;
+		bottom:-50%;
+	}
+}
