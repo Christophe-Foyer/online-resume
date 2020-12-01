@@ -1,0 +1,12 @@
+﻿(jQuery)(document).ready(function () {
+    (function (e) {
+        var t = String.fromCharCode(8203);
+        e("body").find(":not(iframe)").contents().filter(function () {
+            return this.nodeType === 3 && this.nodeValue.indexOf(t) !== -1
+        }).each(function () {
+            var n = e(this)[0].nodeValue;
+            var r = new RegExp(t, "g");
+            e(this)[0].nodeValue = n.replace(r, "")
+        });
+    })(jQuery);
+});

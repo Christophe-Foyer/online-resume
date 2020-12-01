@@ -1,0 +1,29 @@
+﻿// Hard-coded version of footer links
+(function ($) {
+    $(function () {
+        $('.cstm-footer .cstm-footerlinks').html(
+           '<div class="navterms columnwrap numcolumns2">'
+          + '  <ul class="column">'
+          + '    <li><span>OUR DEPARTMENTS</span></li>'
+          + '    <li><a href="https://bme.wustl.edu/">Biomedical Engineering</a></li>'
+		  + '    <li><a href="https://cse.wustl.edu/">Computer Science &amp; Engineering</a></li>'
+		  + '    <li><a href="https://ese.wustl.edu/">Electrical &amp; Systems Engineering</a></li>'
+		  + '    <li><a href="https://eece.wustl.edu/">Energy, Environmental &amp; Chemical Engineering</a></li>'
+		  + '    <li><a href="https://mems.wustl.edu/">Mechanical Engineering &amp; Materials Science</a></li>'
+		  + '    <li><a href="https://sever.wustl.edu/">Professional Education</a></li>'
+          + '  </ul>'
+          + '  <ul class="column last">'
+          + '    <li><span>RESOURCES</span></li>'
+          + '    <li><a href="http://engineering.wustl.edu/our-school/why-wash-u-engineering/Pages/visit.aspx">Maps &amp; Directions</a></li>'
+          + '    <li><a href="https://emergency.wustl.edu/">Emergency Management</a></li>'
+          + '    <li><a href="http://bb.wustl.edu/">Blackboard</a></li>'
+          + '    <li><a href="http://engineering.wustl.edu/our-school/Pages/directory.aspx">Directory</a></li>'
+          + '    <li><a href="http://engineering.wustl.edu/our-school/leadership/offices/engineering-it/Pages/default.aspx">Engineering IT</a></li>'
+          + '    <li><a href="https://connect.wustl.edu/ssoportal" style="padding-right:1%;">Student Email</a> / <a style="padding-left:1%;" href="http://email.wustl.edu">Staff Email</a></li>'
+          + '    <li><a href="https://acadinfo.wustl.edu/webfac/WebFAC.asp" style="padding-right:1%;">WebFAC</a> / <a style="padding-left:1%;" href="https://acadinfo.wustl.edu/">WebSTAC</a></li>'
+          + '  </ul>'
+
+          + '</div>'
+        );
+    });
+})(jQuery);
